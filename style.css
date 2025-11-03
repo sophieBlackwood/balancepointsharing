@@ -228,6 +228,37 @@ cite {
 }
 
 /* HELPLINES */
+/* HELPLINES HERO */
+.hero-helplines {
+  background: linear-gradient(135deg, var(--accent-light), #7fc1c9);
+  color: white;
+  padding: 6rem 1.5rem;
+  text-align: center;
+  border-radius: 0 0 40px 40px;
+}
+
+.hero-helplines h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-helplines p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+.hero-helplines .btn {
+  background: white;
+  color: var(--accent);
+}
+
+.hero-helplines .btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
 .helplines-section p {
   max-width: 700px;
   margin: 0 auto 2rem;
