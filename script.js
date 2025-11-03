@@ -58,17 +58,17 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-// Show ESC popup once per session
+// Show popup after page load (desktop only)
 window.addEventListener("load", () => {
-  if (!sessionStorage.getItem("escPopupShown")) {
-    const popup = document.getElementById("esc-popup");
-    const closeBtn = document.getElementById("close-popup");
-
+  if (window.innerWidth > 768) {
+    const popup = document.getElementById("desktop-popup");
     popup.classList.add("show");
-
-    closeBtn.addEventListener("click", () => {
-      popup.classList.remove("show");
-      sessionStorage.setItem("escPopupShown", "true");
-    });
   }
 });
+
+// Close button
+document.getElementById("close-popup").addEventListener("click", () => {
+  const popup = document.getElementById("desktop-popup");
+  popup.classList.remove("show");
+});
+
