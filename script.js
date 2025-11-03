@@ -24,3 +24,26 @@ window.addEventListener("DOMContentLoaded", () => {
     themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
   }
 });
+
+let escCount = 0;
+let timer;
+
+// Quick Exit Feature: Press ESC 3 times to go to Google
+let escPressCount = 0;
+let escTimer;
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    escPressCount++;
+    clearTimeout(escTimer);
+
+    escTimer = setTimeout(() => {
+      escPressCount = 0;
+    }, 1500);
+
+    if (escPressCount === 3) {
+      window.location.href = "https://www.google.com";
+    }
+  }
+});
+
