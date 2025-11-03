@@ -28,7 +28,16 @@ window.addEventListener("DOMContentLoaded", () => {
 let escCount = 0;
 let timer;
 
-// Quick Exit Feature: Press ESC 3 times to go to Google
+// -------------------------
+// QUICK EXIT FEATURE
+// -------------------------
+
+// Redirect to Google when button clicked
+document.getElementById("quick-exit").addEventListener("click", () => {
+  window.location.href = "https://www.google.com";
+});
+
+// Triple ESC to exit
 let escPressCount = 0;
 let escTimer;
 
@@ -37,13 +46,14 @@ document.addEventListener("keydown", (event) => {
     escPressCount++;
     clearTimeout(escTimer);
 
+    // Reset count after 1.5 seconds
     escTimer = setTimeout(() => {
       escPressCount = 0;
     }, 1500);
 
+    // Trigger redirect after 3 quick presses
     if (escPressCount === 3) {
       window.location.href = "https://www.google.com";
     }
   }
 });
-
