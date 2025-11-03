@@ -227,6 +227,22 @@ cite {
   opacity: 0.8;
 }
 
+/* HELPLINES */
+.helplines-section p {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  color: var(--muted);
+}
+
+.card-grid .card p {
+  margin-bottom: 0.5rem;
+}
+
+.card-grid .card i {
+  color: var(--accent);
+  margin-right: 0.5rem;
+}
+
 /* FOOTER */
 footer {
   background: var(--accent);
