@@ -57,3 +57,18 @@ document.addEventListener("keydown", (event) => {
     }
   }
 });
+
+// Show ESC popup once per session
+window.addEventListener("load", () => {
+  if (!sessionStorage.getItem("escPopupShown")) {
+    const popup = document.getElementById("esc-popup");
+    const closeBtn = document.getElementById("close-popup");
+
+    popup.classList.add("show");
+
+    closeBtn.addEventListener("click", () => {
+      popup.classList.remove("show");
+      sessionStorage.setItem("escPopupShown", "true");
+    });
+  }
+});
