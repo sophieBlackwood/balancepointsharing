@@ -32,9 +32,9 @@ let timer;
 // QUICK EXIT FEATURE
 // -------------------------
 
-// Redirect to Google when button clicked
+// Redirect to Google Weather Search when button clicked
 document.getElementById("quick-exit").addEventListener("click", () => {
-  window.location.href = "https://www.google.com";
+  window.location.href = "https://www.google.com/search?btnI=I&q=weather";
 });
 
 // Triple ESC to exit
@@ -53,7 +53,7 @@ document.addEventListener("keydown", (event) => {
 
     // Trigger redirect after 3 quick presses
     if (escPressCount === 3) {
-      window.location.href = "https://www.google.com";
+      window.location.href = "https://www.google.com/search?btnI=I&q=weather";
     }
   }
 });
