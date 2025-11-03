@@ -58,6 +58,7 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 0;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -75,6 +76,11 @@ a {
 .nav-links a {
   color: var(--text);
   font-weight: 500;
+  transition: color var(--transition);
+}
+
+.nav-links a:hover {
+  color: var(--accent);
 }
 
 #theme-toggle {
@@ -126,6 +132,7 @@ a {
   background: var(--accent-light);
   color: white;
 }
+
 /* QUICK EXIT BUTTON */
 #quick-exit {
   position: fixed;
@@ -156,13 +163,6 @@ body.dark #quick-exit {
   background: #e84c5a;
 }
 
-@media (max-width: 600px) {
-  #quick-exit {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
-  }
-}
-
 /* SECTIONS */
 .section {
   padding: 4rem 1.5rem;
@@ -188,6 +188,7 @@ body.dark #quick-exit {
   padding: 2rem;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
   transition: transform var(--transition), box-shadow var(--transition);
+  text-align: left;
 }
 
 .card:hover {
@@ -199,6 +200,16 @@ body.dark #quick-exit {
   margin-bottom: 0.8rem;
   color: var(--accent);
   font-size: 1.2rem;
+}
+
+.card p {
+  margin-bottom: 0.5rem;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.card a {
+  word-break: break-word;
 }
 
 .link {
@@ -249,22 +260,7 @@ cite {
   color: var(--muted);
 }
 
-#theme-toggle {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 1.3rem;
-  color: var(--accent);
-  transition: transform 0.2s ease, opacity 0.3s ease;
-}
-
-#theme-toggle:hover {
-  transform: scale(1.1);
-  opacity: 0.8;
-}
-
 /* HELPLINES */
-/* HELPLINES HERO */
 .hero-helplines {
   background: linear-gradient(135deg, var(--accent-light), #7fc1c9);
   color: white;
@@ -295,26 +291,6 @@ cite {
   color: white;
 }
 
-.helplines-section p {
-  max-width: 700px;
-  margin: 0 auto 2rem;
-  color: var(--muted);
-}
-
-.card-grid .card p {
-  margin-bottom: 0.5rem;
-}
-
-.card-grid .card i {
-  color: var(--accent);
-  margin-right: 0.5rem;
-}
-
-.card h4 i {
-  color: var(--accent);
-  margin-right: 0.5rem;
-}
-
 /* FOOTER */
 footer {
   background: var(--accent);
@@ -324,9 +300,92 @@ footer {
   font-size: 0.9rem;
 }
 
-/* RESPONSIVE */
+/* -------------------------- */
+/* RESPONSIVE DESIGN TWEAKS  */
+/* -------------------------- */
+
+@media (max-width: 992px) {
+  .hero h2,
+  .hero-helplines h2 {
+    font-size: 2rem;
+  }
+
+  .section {
+    padding: 3rem 1.2rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
   .nav-links {
-    display: none;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero,
+  .hero-helplines {
+    padding: 4rem 1rem;
+  }
+
+  .hero h2,
+  .hero-helplines h2 {
+    font-size: 1.8rem;
+  }
+
+  .hero p,
+  .hero-helplines p {
+    font-size: 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  #quick-exit {
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .btn,
+  .btn-secondary {
+    padding: 0.7rem 1.4rem;
+    font-size: 0.9rem;
+  }
+
+  .section h3 {
+    font-size: 1.6rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero h2,
+  .hero-helplines h2 {
+    font-size: 1.5rem;
+  }
+
+  .card h4 {
+    font-size: 1.05rem;
+  }
+
+  .card p {
+    font-size: 0.9rem;
   }
 }
