@@ -58,17 +58,38 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-// Show popup after page load (desktop only)
+// Show modal on page load for desktop only
 window.addEventListener("load", () => {
   if (window.innerWidth > 768) {
-    const popup = document.getElementById("desktop-popup");
-    popup.classList.add("show");
+    const modal = document.getElementById("quick-exit-modal");
+    modal.classList.add("show");
   }
 });
 
-// Close button
-document.getElementById("close-popup").addEventListener("click", () => {
-  const popup = document.getElementById("desktop-popup");
-  popup.classList.remove("show");
+// Dismiss modal
+document.getElementById("dismiss-modal").addEventListener("click", () => {
+  const modal = document.getElementById("quick-exit-modal");
+  modal.classList.remove("show");
+});
+
+// Triple ESC to exit
+let escPressCount = 0;
+let escTimer;
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    escPressCount++;
+    clearTimeout(escTimer);
+
+    // Reset count after 1.5 seconds
+    escTimer = setTimeout(() => {
+      escPressCount = 0;
+    }, 1500);
+
+    // Trigger redirect after 3 quick presses
+    if (escPressCount === 3) {
+      window.location.href = "https://www.google.com"; // or Google Weather search
+    }
+  }
 });
 
