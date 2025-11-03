@@ -243,6 +243,11 @@ cite {
   margin-right: 0.5rem;
 }
 
+.card h4 i {
+  color: var(--accent);
+  margin-right: 0.5rem;
+}
+
 /* FOOTER */
 footer {
   background: var(--accent);
