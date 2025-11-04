@@ -520,6 +520,69 @@ footer {
   .card h4 {
     font-size: 1.05rem;
   }
+  /* Floating Quick Exit and Back-to-Top Buttons */
+#quick-exit,
+#back-to-top {
+  position: fixed;
+  right: 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.8rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background var(--transition), transform var(--transition), opacity var(--transition);
+  z-index: 2000;
+}
+
+/* Quick Exit */
+#quick-exit {
+  top: auto;
+  bottom: 5.5rem; /* Floating above Back-to-Top */
+  background: #e63946;
+  color: white;
+}
+
+#quick-exit:hover {
+  background: #c92d3d;
+  transform: scale(1.05);
+}
+
+/* Back-to-Top */
+#back-to-top {
+  top: auto;
+  bottom: 1rem;
+  background: var(--accent);
+  color: white;
+}
+
+#back-to-top:hover {
+  background: var(--accent-light);
+  transform: scale(1.05);
+}
+
+/* Adjust for small screens */
+@media (max-width: 600px) {
+  #quick-exit,
+  #back-to-top {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.85rem;
+    bottom: auto; /* let it stack */
+  }
+
+  #quick-exit {
+    bottom: 4rem;
+  }
+
+  #back-to-top {
+    bottom: 1rem;
+  }
+}
+
 
   .card p {
     font-size: 0.9rem;
