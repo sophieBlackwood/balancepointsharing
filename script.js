@@ -93,3 +93,12 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+// Back to top functionality
+document.getElementById("back-to-top").addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// Quick Exit remains the same
+document.getElementById("quick-exit").addEventListener("click", () => {
+  window.location.href = "https://www.google.com";
+});
