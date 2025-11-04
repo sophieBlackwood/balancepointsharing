@@ -32,7 +32,6 @@ themeToggle.addEventListener("click", () => {
 // -------------------------
 // QUICK EXIT FEATURE
 // -------------------------
-
 const quickExitURL = "https://www.google.com/search?btnI=I&q=weather";
 
 // Quick Exit button
@@ -40,10 +39,10 @@ document.getElementById("quick-exit").addEventListener("click", () => {
   window.location.href = quickExitURL;
 });
 
-// Quick Exit Modal (show only on desktop)
+// Show Quick Exit Modal (Desktop Only)
 window.addEventListener("load", () => {
+  const modal = document.getElementById("quick-exit-modal");
   if (window.innerWidth > 768) {
-    const modal = document.getElementById("quick-exit-modal");
     modal.classList.add("show");
   }
 });
@@ -82,18 +81,28 @@ document.addEventListener("keydown", (event) => {
 // -------------------------
 // BACK TO TOP BUTTON
 // -------------------------
-document.getElementById("back-to-top").addEventListener("click", () => {
+const backToTopBtn = document.getElementById("back-to-top");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 400) {
+    backToTopBtn.classList.add("visible");
+  } else {
+    backToTopBtn.classList.remove("visible");
+  }
+});
+
+backToTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 
 // -------------------------
-// QUICK ACTIONS MENU TOGGLE (for mobile)
+// QUICK ACTIONS MENU (Mobile Support)
 // -------------------------
 const toggleButton = document.getElementById("quick-actions-toggle");
 const actionsMenu = document.getElementById("actions-menu");
 
-if (toggleButton) {
+if (toggleButton && actionsMenu) {
   toggleButton.addEventListener("click", () => {
     actionsMenu.classList.toggle("show");
     toggleButton.classList.toggle("active");
