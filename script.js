@@ -1,20 +1,9 @@
+// -------------------------
+// THEME TOGGLE
+// -------------------------
 const themeToggle = document.getElementById("theme-toggle");
 
-// Toggle theme
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-  const darkMode = document.body.classList.contains("dark");
-
-  // Change icon
-  themeToggle.innerHTML = darkMode
-    ? '<i class="fa-regular fa-sun"></i>'
-    : '<i class="fa-solid fa-moon"></i>';
-
-  // Save preference
-  localStorage.setItem("theme", darkMode ? "dark" : "light");
-});
-
-// Remember saved theme
+// Apply saved theme on load
 window.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
@@ -25,40 +14,33 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-let escCount = 0;
-let timer;
+// Toggle theme on button click
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  const darkMode = document.body.classList.contains("dark");
+
+  // Update icon
+  themeToggle.innerHTML = darkMode
+    ? '<i class="fa-regular fa-sun"></i>'
+    : '<i class="fa-solid fa-moon"></i>';
+
+  // Save preference
+  localStorage.setItem("theme", darkMode ? "dark" : "light");
+});
+
 
 // -------------------------
 // QUICK EXIT FEATURE
 // -------------------------
 
-// Redirect to Google Weather Search when button clicked
+const quickExitURL = "https://www.google.com/search?btnI=I&q=weather";
+
+// Quick Exit button
 document.getElementById("quick-exit").addEventListener("click", () => {
-  window.location.href = "https://www.google.com/search?btnI=I&q=weather";
+  window.location.href = quickExitURL;
 });
 
-// Triple ESC to exit
-let escPressCount = 0;
-let escTimer;
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    escPressCount++;
-    clearTimeout(escTimer);
-
-    // Reset count after 1.5 seconds
-    escTimer = setTimeout(() => {
-      escPressCount = 0;
-    }, 1500);
-
-    // Trigger redirect after 3 quick presses
-    if (escPressCount === 3) {
-      window.location.href = "https://www.google.com/search?btnI=I&q=weather";
-    }
-  }
-});
-
-// Show modal on page load for desktop only
+// Quick Exit Modal (show only on desktop)
 window.addEventListener("load", () => {
   if (window.innerWidth > 768) {
     const modal = document.getElementById("quick-exit-modal");
@@ -72,7 +54,10 @@ document.getElementById("dismiss-modal").addEventListener("click", () => {
   modal.classList.remove("show");
 });
 
-// Triple ESC to exit
+
+// -------------------------
+// TRIPLE ESC TO EXIT
+// -------------------------
 let escPressCount = 0;
 let escTimer;
 
@@ -88,17 +73,29 @@ document.addEventListener("keydown", (event) => {
 
     // Trigger redirect after 3 quick presses
     if (escPressCount === 3) {
-      window.location.href = "https://www.google.com"; // or Google Weather search
+      window.location.href = quickExitURL;
     }
   }
 });
 
-// Back to top functionality
+
+// -------------------------
+// BACK TO TOP BUTTON
+// -------------------------
 document.getElementById("back-to-top").addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Quick Exit remains the same
-document.getElementById("quick-exit").addEventListener("click", () => {
-  window.location.href = "https://www.google.com";
-});
+
+// -------------------------
+// QUICK ACTIONS MENU TOGGLE (for mobile)
+// -------------------------
+const toggleButton = document.getElementById("quick-actions-toggle");
+const actionsMenu = document.getElementById("actions-menu");
+
+if (toggleButton) {
+  toggleButton.addEventListener("click", () => {
+    actionsMenu.classList.toggle("show");
+    toggleButton.classList.toggle("active");
+  });
+}
