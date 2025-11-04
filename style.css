@@ -194,7 +194,6 @@ a {
 /* ==========================
    FLOATING BUTTONS
 ========================== */
-#quick-exit,
 #back-to-top {
   position: fixed;
   right: 1.5rem;
@@ -211,18 +210,36 @@ a {
   transition: background var(--transition), transform var(--transition), opacity var(--transition);
   z-index: 2000;
 }
-
-/* Quick Exit */
+/* QUICK EXIT BUTTON */
 #quick-exit {
+  position: fixed;
   top: 1.2rem;
+  right: 1.2rem;
   background: #e63946;
   color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.7rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  z-index: 2000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  transition: background var(--transition), transform var(--transition);
 }
 
 #quick-exit:hover {
   background: #c92d3d;
   transform: scale(1.05);
 }
+
+body.dark #quick-exit {
+  background: #e84c5a;
+}
+
 
 /* Back-to-Top */
 #back-to-top {
@@ -371,7 +388,6 @@ footer {
   }
 
   #theme-toggle,
-  #quick-exit,
   #back-to-top {
     right: 1rem;
     width: 2.6rem;
