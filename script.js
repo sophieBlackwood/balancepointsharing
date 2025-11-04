@@ -32,7 +32,7 @@ themeToggle.addEventListener("click", () => {
 // -------------------------
 // QUICK EXIT FEATURE
 // -------------------------
-const quickExitURL = "https://www.google.com/search?btnI=I&q=weather";
+const quickExitURL = "https://www.google.com/search?q=weather+today&oq=weather+today&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCDIwNzBqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8&sei=XmIKabXjNuCr0PEP4cuqoA4&safe=active&ssui=on&zx=1762288224072&no_sw_cr=1";
 
 // Quick Exit button
 document.getElementById("quick-exit").addEventListener("click", () => {
@@ -78,33 +78,40 @@ document.addEventListener("keydown", (event) => {
 });
 
 
-// -------------------------
-// BACK TO TOP BUTTON
-// -------------------------
-const backToTopBtn = document.getElementById("back-to-top");
+const backToTop = document.getElementById("back-to-top");
+const floatingButtons = document.getElementById("floating-buttons");
+let holdTimer;
 
+// Show back-to-top on scroll
 window.addEventListener("scroll", () => {
-  if (window.scrollY > 400) {
-    backToTopBtn.classList.add("visible");
+  if (window.scrollY > 300) {
+    backToTop.classList.add("visible");
+    floatingButtons.classList.add("compact");
   } else {
-    backToTopBtn.classList.remove("visible");
+    backToTop.classList.remove("visible");
+    floatingButtons.classList.remove("compact");
+    floatingButtons.classList.remove("reveal");
   }
 });
 
-backToTopBtn.addEventListener("click", () => {
+// Smooth scroll to top
+backToTop.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-
-// -------------------------
-// QUICK ACTIONS MENU (Mobile Support)
-// -------------------------
-const toggleButton = document.getElementById("quick-actions-toggle");
-const actionsMenu = document.getElementById("actions-menu");
-
-if (toggleButton && actionsMenu) {
-  toggleButton.addEventListener("click", () => {
-    actionsMenu.classList.toggle("show");
-    toggleButton.classList.toggle("active");
-  });
+// Only allow hold-to-reveal on mobile
+function isMobile() {
+  return window.matchMedia("(max-width: 768px)").matches;
 }
+
+backToTop.addEventListener("mousedown", () => {
+  if (isMobile()) {
+    holdTimer = setTimeout(() => {
+      floatingButtons.classList.toggle("reveal");
+    }, 600);
+  }
+});
+
+["mouseup", "mouseleave", "touchend"].forEach(evt =>
+  backToTop.addEventListener(evt, () => clearTimeout(holdTimer))
+);
