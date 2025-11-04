@@ -91,23 +91,116 @@ a {
 }
 
 /* ==========================
-   THEME TOGGLE BUTTON
+   HERO SECTIONS
 ========================== */
-#theme-toggle {
+.hero,
+.hero-helplines,
+.hero-about {
+  color: white;
+  padding: 6rem 1.5rem;
+  text-align: center;
+  border-radius: 0 0 40px 40px;
+}
+
+.hero {
+  background: linear-gradient(135deg, var(--accent-light), var(--accent));
+}
+
+.hero-helplines {
+  background: linear-gradient(135deg, var(--accent-light), #7fc1c9);
+}
+
+.hero-about {
+  background: linear-gradient(135deg, var(--accent-light), var(--accent));
+}
+
+.hero h2,
+.hero-helplines h2,
+.hero-about h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero p,
+.hero-helplines p,
+.hero-about p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+.btn {
+  background: white;
+  color: var(--accent);
+  padding: 0.9rem 1.8rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.btn:hover {
+  background: var(--accent-light);
+  color: white;
+}
+
+.btn-secondary {
+  display: inline-block;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+  padding: 0.8rem 1.8rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: background var(--transition), color var(--transition);
+}
+
+.btn-secondary:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* ==========================
+   FLOATING BUTTON LAYOUT
+========================== */
+
+#floating-buttons {
   position: fixed;
   right: 1.5rem;
-  bottom: 3rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 1rem;
+  z-index: 2000;
+}
+
+/* Smooth transitions */
+#back-to-top,
+#theme-toggle {
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background: var(--card-bg);
-  color: var(--text);
-  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.2rem;
   cursor: pointer;
   box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-  transition: background var(--transition), transform var(--transition), color var(--transition);
-  z-index: 2000;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+/* Theme toggle styling */
+#theme-toggle {
+  background: var(--card-bg);
+  color: var(--text);
+  border: 2px solid var(--accent);
 }
 
 #theme-toggle:hover {
@@ -115,6 +208,46 @@ a {
   background: var(--accent-light);
   color: white;
 }
+
+/* Back-to-top styling */
+#back-to-top {
+  background: var(--accent);
+  color: white;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#back-to-top:hover {
+  background: var(--accent-light);
+  transform: scale(1.05);
+}
+
+/* Compact layout for small screens */
+@media (max-width: 768px) {
+  #floating-buttons {
+    gap: 0; /* stack closely */
+  }
+
+  /* Hide theme toggle by default */
+  #floating-buttons.compact #theme-toggle {
+    transform: scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Reveal on press & hold */
+  #floating-buttons.reveal #theme-toggle {
+    transform: translateY(-4rem);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 
 /* ==========================
    HERO SECTIONS
@@ -210,6 +343,7 @@ a {
   transition: background var(--transition), transform var(--transition), opacity var(--transition);
   z-index: 2000;
 }
+
 /* QUICK EXIT BUTTON */
 #quick-exit {
   position: fixed;
@@ -240,11 +374,88 @@ body.dark #quick-exit {
   background: #e84c5a;
 }
 
-@media (max-width: 600px) {
-  #quick-exit {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
-  }
+
+/* Back-to-Top */
+#back-to-top {
+  bottom: 1rem;
+  background: var(--accent);
+  color: white;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#back-to-top:hover {
+  background: var(--accent-light);
+  transform: scale(1.05);
+}
+
+/* ==========================
+   FLOATING BUTTON OVERLAY BEHAVIOR
+========================== */
+
+#floating-buttons {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  z-index: 2000;
+}
+
+/* When the Back-to-Top button becomes visible */
+#floating-buttons.compact #theme-toggle {
+  transform: scale(0.9);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* When user presses & holds Back-to-Top */
+#floating-buttons.reveal #theme-toggle {
+  transform: translateY(-4rem);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Add smooth transitions for both buttons */
+#back-to-top,
+#theme-toggle {
+  transition: all 0.3s ease;
+}
+
+/* QUICK EXIT BUTTON */
+#quick-exit {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.7rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  z-index: 2000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  transition: background var(--transition), transform var(--transition);
+}
+
+#quick-exit:hover {
+  background: #c92d3d;
+  transform: scale(1.05);
+}
+
+body.dark #quick-exit {
+  background: #e84c5a;
 }
 
 
@@ -360,6 +571,10 @@ blockquote,
   transform: translateY(-4px);
   box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
+/* ABOUT US */
+.team-photo {
+	width:90%;
+}
 
 /* ==========================
    FOOTER
@@ -400,5 +615,11 @@ footer {
     width: 2.6rem;
     height: 2.6rem;
     font-size: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  #quick-exit {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
   }
 }
