@@ -115,3 +115,62 @@ backToTop.addEventListener("mousedown", () => {
 ["mouseup", "mouseleave", "touchend"].forEach(evt =>
   backToTop.addEventListener(evt, () => clearTimeout(holdTimer))
 );
+
+/* Counselors scheduling modal + mailto fallback */
+document.querySelectorAll(".schedule-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const counselor = btn.getAttribute("data-counselor");
+    const calendly = btn.getAttribute("data-calendly");
+    openBookingModal(counselor, calendly);
+  });
+});
+
+const modal = document.getElementById("booking-modal");
+const modalClose = modal.querySelector(".modal-close");
+const bookingForm = document.getElementById("booking-form");
+const bookingCounselorText = document.getElementById("booking-counselor");
+const formCounselorInput = document.getElementById("form-counselor");
+const openCalendlyLink = document.getElementById("open-calendly");
+
+function openBookingModal(counselorName, calendlyUrl) {
+  bookingCounselorText.textContent = `For: ${counselorName}`;
+  formCounselorInput.value = counselorName;
+  openCalendlyLink.href = calendlyUrl || "#";
+  modal.setAttribute("aria-hidden", "false");
+  // focus first field
+  modal.querySelector('input[name="name"]').focus();
+}
+
+function closeBookingModal() {
+  modal.setAttribute("aria-hidden", "true");
+  bookingForm.reset();
+}
+
+modalClose.addEventListener("click", closeBookingModal);
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) closeBookingModal();
+});
+
+// Mailto fallback: sends a formatted email to scheduling inbox
+bookingForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const form = new FormData(bookingForm);
+  const counselor = form.get("counselor");
+  const name = form.get("name");
+  const email = form.get("email");
+  const phone = form.get("phone") || "N/A";
+  const pref = form.get("pref") || "No preference";
+  const reason = form.get("reason") || "N/A";
+
+  const subject = encodeURIComponent(`Appointment request — ${counselor}`);
+  const body = encodeURIComponent(
+    `Counselor: ${counselor}\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nPreferred: ${pref}\nReason: ${reason}`
+  );
+
+  // Replace with your real scheduling inbox
+  const mailTo = `mailto:example@balancepoint.org?subject=${subject}&body=${body}`;
+  window.location.href = mailTo;
+
+  // Optionally close modal after invoking mailto
+  setTimeout(closeBookingModal, 600);
+});
