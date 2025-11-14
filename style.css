@@ -2,8 +2,8 @@
    VARIABLES
 ========================== */
 :root {
-  --bg: #f9fafb;
-  --text: #1c1e21;
+  --bg: #F2FBFA;
+  --text: #03443C;
   --accent: #2a5d67;
   --accent-light: #5b8a94;
   --card-bg: #ffffff;
@@ -13,8 +13,8 @@
 }
 
 body.dark {
-  --bg: #1c1e21;
-  --text: #eaeaea;
+  --bg: #03443C;
+  --text: #DFFAEA;
   --accent: #9acfd3;
   --accent-light: #6fb3b8;
   --card-bg: #2a2d33;
