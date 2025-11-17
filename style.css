@@ -13,8 +13,8 @@
 }
 
 body.dark {
-  --bg: #03443C;
-  --text: #DFFAEA;
+  --bg: #DFFAEA;
+  --text: #03443C;
   --accent: #9acfd3;
   --accent-light: #6fb3b8;
   --card-bg: #2a2d33;
@@ -380,14 +380,30 @@ body.dark #quick-exit {
   gap: 1.5rem;
 }
 
-/* Card avatar placeholder */
 .counselor .avatar {
   width: 72px;
   height: 72px;
-  background: linear-gradient(135deg, rgba(42,93,103,0.08), rgba(91,138,148,0.06));
   border-radius: 12px;
   margin-bottom: 0.75rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
+
+/* Default fallback gradient if image fails to load */
+.counselor .avatar {
+  background-image: linear-gradient(135deg, rgba(42,93,103,0.08), rgba(91,138,148,0.06));
+}
+
+/* Per-counselor overrides */
+.avatar[data-avatar="evelyn"] { background-image: url("seaglasssanctuary/evelyn.jpg"); }
+.avatar[data-avatar="marcus"] { background-image: url("seaglasssanctuary/marcus.jpg"); }
+.avatar[data-avatar="jasmine"] { background-image: url("seaglasssanctuary/jasmine.jpg"); }
+.avatar[data-avatar="theo"]   { background-image: url("seaglasssanctuary/theo.jpg"); }
+.avatar[data-avatar="lauren"] { background-image: url("seaglasssanctuary/lauren.jpg"); }
+.avatar[data-avatar="samuel"] { background-image: url("seaglasssanctuary/samuel.jpg"); }
+
 
 /* Card body finer spacing */
 .counselor .card-body h4 {
